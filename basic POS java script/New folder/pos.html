@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sari-Sari Store POS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="pos-header">
+        <span class="eyebrow">Sari-Sari Store</span>
+        <h1>Point of Sale System</h1>
+        <div class="cashier-row">
+            <label for="cashier-input">Cashier:</label>
+            <input type="text" id="cashier-input" placeholder="Enter cashier name">
+        </div>
+    </header>
+
+    <div class="pos-main">
+
+        <!-- LEFT: PRODUCT CATALOG -->
+        <main class="pos-catalog">
+            <section class="panel">
+                <h2>Product Catalog</h2>
+                <input type="text" id="search-input" placeholder="Search product by name">
+                <div class="table-wrap catalog-scroll" style="margin-top: 1rem;">
+                    <table id="catalog-table" border="1">
+                      <tr>
+                        <th>ID</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                      </tr>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <!-- RIGHT SIDEBAR: Current Sale + Checkout -->
+        <aside class="pos-sidebar">
+
+            <section class="panel">
+                <h2>Current Sale</h2>
+                <div class="field-row">
+                    <label for="quantity-input">Quantity for next item:</label>
+                    <input type="number" id="quantity-input" min="1" value="1">
+                </div>
+
+                <div class="table-wrap">
+                    <table id="cart-table" border="1">
+                      <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                      </tr>
+                    </table>
+                </div>
+
+                <div class="totals">
+                    <p>Subtotal: &#8369;<span id="subtotal-display">0.00</span></p>
+                    <p>Discount<span id="discount-label"></span>: &#8369;<span id="discount-display">0.00</span></p>
+                    <p class="total-due"><strong>Total Due: &#8369;<span id="total-display">0.00</span></strong></p>
+                </div>
+            </section>
+
+            <section class="panel">
+                <h2>Checkout</h2>
+
+                <fieldset class="discount-fieldset">
+                    <legend>Discount Type</legend>
+                    <div class="discount-options">
+                        <label class="discount-option">
+                            <input type="radio" name="discount-type" value="none" checked>
+                            <span>10% <small>(Regular, over &#8369;1000)</small></span>
+                        </label>
+                        <label class="discount-option">
+                            <input type="radio" name="discount-type" value="student">
+                            <span>Student (5%)</span>
+                        </label>
+                        <label class="discount-option">
+                            <input type="radio" name="discount-type" value="senior">
+                            <span>Senior Citizen (20%)</span>
+                        </label>
+                        <label class="discount-option">
+                            <input type="radio" name="discount-type" value="pwd">
+                            <span>PWD (20%)</span>
+                        </label>
+                        <label class="discount-option">
+                            <input type="checkbox" id="suki-toggle">
+                            <span>Suki Card <small>(Points only)</small></span>
+                        </label>
+                    </div>
+                    <input type="text" id="discount-id-input" placeholder="ID / Card No. (for Senior or PWD)">
+                    <input type="text" id="suki-card-input" placeholder="Suki Card No." style="display:none; margin-top:0.5rem;">
+                    <p id="suki-points-info"></p>
+                </fieldset>
+
+                <div class="field-row">
+                    <input type="text" id="customer-input" placeholder="Customer Name (optional)">
+                    <input type="number" id="payment-input" placeholder="Amount Paid">
+                    <button id="checkout-btn">Checkout</button>
+                </div>
+                <p id="confirmation-message"></p>
+            </section>
+
+        </aside>
+
+    </div><!-- /.pos-main -->
+
+    <!-- BOTTOM: REPORTS -->
+    <div class="pos-bottom">
+        <section class="panel">
+            <h2>Reports</h2>
+            <button id="view-transactions-btn">View All Transactions</button>
+            <button id="total-sales-btn">Total Sales Today</button>
+            <button id="best-seller-btn">Most Purchased Product</button>
+
+            <div id="report-div"></div>
+
+            <div class="table-wrap" style="margin-top: 1rem;">
+                <table id="transactions-table" border="1">
+                  <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Cashier</th>
+                    <th>Customer</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Paid</th>
+                    <th>Change</th>
+                  </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Receipt popup -->
+    <div id="receipt-modal" class="modal-overlay">
+        <div class="receipt-paper">
+            <button id="receipt-close-btn" class="modal-close" aria-label="Close receipt">&times;</button>
+            <div id="receipt-div"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
